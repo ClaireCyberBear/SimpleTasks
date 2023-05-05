@@ -1,8 +1,8 @@
 # SimpleTasks
 
 PROJECT PURPOSE:
-To create a minimal distraction TODO prototype. The main focus of this program is to present TODO tasks one at a time
-so that the user doesn't feel overwhelmed or distracted.
+To create a minimal distraction TODO prototype. The main focus of this program is to present TODO tasks one at a time instead at once.
+This is also just a project for me to demostrate basic React capabilities
 
 HOW-TO-USE:
 At the moment this is just a simple webapp, the repo is public for those who wish to inspect my code.
@@ -21,4 +21,4 @@ Bootstrap
 Supabase
 
 CREDITS:
-ClaireCyberBear (me)
+Claire (me)
