@@ -2,25 +2,25 @@ import "./style.css";
 
 function App() {
   return (
-    <div class="container">
-      <header class="header">
-        <div class="logo">
+    <div className="container">
+      <header className="header">
+        <div className="logo">
           <img src="logo.png" height="68" width="68" alt="SimpleTask Logo" />
           <h1>SIMPLE TASK</h1>
         </div>
 
-        <button class="btn btn-large btn-open">Login</button>
+        <button className="btn btn-large btn-open">Login</button>
       </header>
       <MenuSidebar />
-      <main class="main">
-        <form class="taskform hidden">
+      <main className="main">
+        <form className="taskform hidden">
           <input type="text" placeholder="Title" />
           <input type="text" placeholder="Description" />
-          <button class="btn add-btn">Add</button>
+          <button className="btn add-btn">Add</button>
         </form>
 
-        <ul class="tasklist">
-          <li class="tasks"></li>
+        <ul className="tasklist">
+          <li className="tasks"></li>
         </ul>
       </main>
     </div>
@@ -29,17 +29,17 @@ function App() {
 
 function MenuSidebar() {
   return (
-    <aside class="sidebar">
-      <button class="btn sidebar-open">Open</button>
-      <ul class="btn-sidebar hidden">
+    <aside className="sidebar">
+      <button className="btn sidebar-open">Open</button>
+      <ul className="btn-sidebar hidden">
         <li>
-          <button class="btn newtask">New Task</button>
+          <button className="btn newtask">New Task</button>
         </li>
         <li>
-          <button class="btn tasklist-btn">Task List</button>
+          <button className="btn tasklist-btn">Task List</button>
         </li>
         <li>
-          <button class="btn">Settings</button>
+          <button className="btn">Settings</button>
         </li>
       </ul>
     </aside>
