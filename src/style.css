@@ -13,8 +13,6 @@ body {
 
 .container {
   height: 100vh;
-  margin-top: 5px;
-  margin-right: 10px;
 }
 .hidden {
   display: none !important;
@@ -87,8 +85,11 @@ ul {
 
 .logo {
   border-radius: 250px;
+  margin-left: 5px;
 }
-
+.title {
+  margin-left: 10px;
+}
 .btn {
   border: none;
   font-weight: 900;
@@ -168,11 +169,20 @@ ul {
   width: 100px;
 }
 
-.btn-large {
+.btn-login {
+  margin-right: 10px;
+  margin-bottom: 10px;
   font-size: 18px;
   padding: 20px 32px 17px;
 }
 
-.btn-large:hover {
+.btn-login:hover {
   transform: scale(125%) rotate(0.5deg);
+}
+
+/* This is temporary until proper login is added */
+
+.Username {
+  font-size: 24px;
+  color: rgb(5, 183, 237);
 }
