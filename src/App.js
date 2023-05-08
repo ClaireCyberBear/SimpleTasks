@@ -43,7 +43,7 @@ function NewTask({ setTasks, setShowNewTask }) {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const { data: NewFact, error } = await supabase
+    const { data: NewTask, error } = await supabase
       .from("tasks")
       .insert([{ title, description }])
       .select();
