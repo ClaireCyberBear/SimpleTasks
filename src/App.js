@@ -1,8 +1,19 @@
-import { useEffec, useState } from "react";
+import { useEffect, useState } from "react";
+import supabase from "./supabase";
 import "./style.css";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false); //Menu sidebar by default is closed.
+  const [task, setTask] = useState([]);
+
+  useEffect(function () {
+    async function getTask() {
+      let query = supabase.from("tasks").select("*");
+
+      setTask(task);
+    }
+    getTask();
+  });
 
   return (
     <div className="container">
@@ -22,7 +33,7 @@ function App() {
           <input type="text" placeholder="Description" />
           <button className="btn add-btn">Add</button>
         </form>
-
+        {<TaskList task={task} setTask={setTask} />}
         <ul className="tasklist">
           <li className="tasks"></li>
         </ul>
@@ -63,4 +74,25 @@ function SideMenu() {
   );
 }
 
+function TaskList({ task, setTask }) {
+  return (
+    <ul class="tasklist">
+      {task.map((task) => (
+        <Task key={task.id} task={task} setTask={setTask} />
+      ))}
+    </ul>
+  );
+}
+
+function Task({ task }) {
+  return (
+    <li class="task">
+      <button class="finish"></button>
+      <div class="taskcontainer">
+        <h2 class="tasktitle">{task.title}</h2>
+        <h3 class="description">{task.description}</h3>
+      </div>
+    </li>
+  );
+}
 export default App;
