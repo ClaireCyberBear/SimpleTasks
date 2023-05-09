@@ -4,14 +4,13 @@ import "./style.css";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false); //Menu sidebar by default is closed.
+
   const [tasks, setTasks] = useState([]);
 
   useEffect(function () {
     async function getTasks() {
-      let query = supabase.from("tasks").select("*");
-      const { data: tasks, error } = await query
-        .order("id", { ascending: false })
-        .limit(100);
+      let query = supabase.from("random_tasks").select("*");
+      const { data: tasks, error } = await query.limit(5);
 
       setTasks(tasks);
     }
@@ -27,7 +26,11 @@ function App() {
         <h1 className="Username">DEMO USER</h1>
         <button className="btn btn-login hidden">Login</button>
       </header>
-      <MenuButton showMenu={showMenu} setShowMenu={setShowMenu} />
+      <MenuButton
+        showMenu={showMenu}
+        setShowMenu={setShowMenu}
+        setTasks={setTasks}
+      />
 
       <main className="main">
         <TaskList tasks={tasks} setTasks={setTasks} />
@@ -47,8 +50,11 @@ function NewTask({ setTasks, setShowNewTask }) {
       .from("tasks")
       .insert([{ title, description }])
       .select();
+
     if (!error) setTasks((tasks) => [NewTask[0], ...tasks]);
 
+    setTitle("");
+    setDescription("");
     setShowNewTask(false);
   }
 
@@ -71,14 +77,14 @@ function NewTask({ setTasks, setShowNewTask }) {
         onChange={(event) => setDescription(event.target.value)}
       />
       <div className="formsubmit">
-        <button className="btn form-btn">Add</button>{" "}
+        <button className="btn form-btn">Add</button>
       </div>
     </form>
   );
 }
 
 //Little function for the MenuButton, when clicked it sets showMenu to true
-function MenuButton({ showMenu, setShowMenu }) {
+function MenuButton({ showMenu, setShowMenu, setTasks }) {
   return (
     <aside className="sidebar">
       <button
@@ -87,7 +93,7 @@ function MenuButton({ showMenu, setShowMenu }) {
       >
         {showMenu ? "Close" : "Menu"}
       </button>
-      {showMenu ? <SideMenu /> : null}
+      {showMenu ? <SideMenu setTasks={setTasks} /> : null}
     </aside>
   );
 }
@@ -130,10 +136,19 @@ function TaskList({ tasks, setTasks }) {
 }
 
 //This is where the individual task is loaded from supabase
-function Task({ task }) {
+function Task({ task, setTasks }) {
+  async function deleteTask() {
+    const { data, error } = await supabase
+      .from("tasks")
+      .delete()
+      .eq("id", task.id);
+
+    if (!error) setTasks((tasks) => tasks.filter((t) => t.id !== task.id));
+  }
+
   return (
     <li className="task">
-      <button className="finish"></button>
+      <button className="finish" onClick={deleteTask}></button>
       <div className="taskcontainer">
         <h2 className="tasktitle">{task.title}</h2>
         <h3 className="description">{task.description}</h3>
