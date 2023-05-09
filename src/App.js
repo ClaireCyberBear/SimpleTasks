@@ -112,7 +112,7 @@ function SideMenu({ setTasks }) {
         <button className="btn tasklist-btn">Task List</button>
       </li>
       <li>
-        <button className="btn">Settings</button>
+        <button className="btn useless">Useless Button</button>
       </li>
       <li>
         <button

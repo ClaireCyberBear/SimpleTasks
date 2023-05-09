@@ -256,3 +256,8 @@ input {
     gap: 16px;
   }
 }
+
+.useless:hover {
+  transform: scale(130%) rotate(5000deg) translateX(100px);
+  transition: 5s;
+}
