@@ -237,3 +237,21 @@ input {
 .btn-large:hover {
   transform: scale(125%) rotate(0.5deg);
 }
+
+@media (max-width: 900px) {
+  .main {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  #root {
+    padding: 24px;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
