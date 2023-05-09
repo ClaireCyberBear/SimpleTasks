@@ -23,6 +23,11 @@ function App() {
           <img src="logo.png" height="68" width="68" alt="SimpleTask Logo" />
           <h1 className="title">SIMPLE TASK</h1>
         </div>
+        <button className="btn btn-large">
+          <a href="https://github.com/ClaireCyberBear/SimpleTasks">
+            Source Code
+          </a>
+        </button>
         <h1 className="Username">DEMO USER</h1>
         <button className="btn btn-login hidden">Login</button>
       </header>

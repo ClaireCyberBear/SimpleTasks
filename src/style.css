@@ -230,6 +230,7 @@ input {
 }
 
 .btn-large {
+  margin-top: 0px;
   font-size: 18px;
   padding: 20px 32px 17px;
 }
