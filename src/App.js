@@ -28,18 +28,20 @@ function App() {
             Source Code
           </a>
         </button>
-        <h1 className="Username">DEMO USER</h1>
+        <h1 className="username">DEMO USER</h1>
         <button className="btn btn-login hidden">Login</button>
       </header>
-      <MenuButton
-        showMenu={showMenu}
-        setShowMenu={setShowMenu}
-        setTasks={setTasks}
-      />
+      <div className="menu-task">
+        <MenuButton
+          showMenu={showMenu}
+          setShowMenu={setShowMenu}
+          setTasks={setTasks}
+        />
 
-      <main className="main">
-        <TaskList tasks={tasks} setTasks={setTasks} />
-      </main>
+        <main className="main">
+          <TaskList tasks={tasks} setTasks={setTasks} />
+        </main>
+      </div>
     </div>
   );
 }
@@ -114,11 +116,8 @@ function SideMenu({ setTasks }) {
       <li>
         <button className="btn useless">Useless Button</button>
       </li>
-      <li>
-        <button
-          className="btn newtask"
-          onClick={() => setShowNewTask((show) => !show)}
-        >
+      <li className="newtask">
+        <button className="btn" onClick={() => setShowNewTask((show) => !show)}>
           New Task
         </button>
         {showNewTask ? (
