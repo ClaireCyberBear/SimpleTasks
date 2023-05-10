@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import Login from "./LoginPage";
 import supabase from "./supabase";
 import "./style.css";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false); //Menu sidebar by default is closed.
-
+  const [showNewTask, setShowNewTask] = useState(false);
   const [tasks, setTasks] = useState([]);
 
-  useEffect(function () {
+  useEffect(function() {
     async function getTasks() {
       let query = supabase.from("random_tasks").select("*");
       const { data: tasks, error } = await query.limit(5);
@@ -17,32 +19,58 @@ function App() {
     getTasks();
   }, []);
   return (
-    <div className="container">
-      <header className="header">
-        <div className="logo">
-          <img src="logo.png" height="68" width="68" alt="SimpleTask Logo" />
-          <h1 className="title">SIMPLE TASK</h1>
-        </div>
-        <button className="btn btn-large">
-          <a href="https://github.com/ClaireCyberBear/SimpleTasks">
-            Source Code
-          </a>
-        </button>
-        <h1 className="username">DEMO USER</h1>
-        <button className="btn btn-login hidden">Login</button>
-      </header>
-      <div className="menu-task">
-        <MenuButton
-          showMenu={showMenu}
-          setShowMenu={setShowMenu}
-          setTasks={setTasks}
-        />
+    <Router>
+      <div className="container">
+        <header className="header">
+          <div className="logo">
+            <Link to="/">
+              <img
+                src="logo.png"
+                height="68"
+                width="68"
+                alt="SimpleTask Logo"
+              />
+            </Link>
+            <h1 className="title">SIMPLE TASK</h1>
+          </div>
+          <button className="btn btn-large">
+            <a href="https://github.com/ClaireCyberBear/SimpleTasks">
+              Source Code
+            </a>
+          </button>
+          <button className="btn btn-large">Home</button>
+          <Link to="/login" className="btn btn-large">
+            Login
+          </Link>
+        </header>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/"
+            element={
+              <div className="menu-task">
+                <MenuButton
+                  showMenu={showMenu}
+                  setShowMenu={setShowMenu}
+                  setTasks={setTasks}
+                  setShowNewTask={setShowNewTask}
+                />
 
-        <main className="main">
-          <TaskList tasks={tasks} setTasks={setTasks} />
-        </main>
+                <main className="main">
+                  {showNewTask ? (
+                    <NewTask
+                      setTasks={setTasks}
+                      setShowNewTask={setShowNewTask}
+                    />
+                  ) : null}
+                  <TaskList tasks={tasks} setTasks={setTasks} />
+                </main>
+              </div>
+            }
+          />
+        </Routes>
       </div>
-    </div>
+    </Router>
   );
 }
 
@@ -91,7 +119,7 @@ function NewTask({ setTasks, setShowNewTask }) {
 }
 
 //Little function for the MenuButton, when clicked it sets showMenu to true
-function MenuButton({ showMenu, setShowMenu, setTasks }) {
+function MenuButton({ showMenu, setShowMenu, setTasks, setShowNewTask }) {
   return (
     <aside className="sidebar">
       <button
@@ -100,14 +128,15 @@ function MenuButton({ showMenu, setShowMenu, setTasks }) {
       >
         {showMenu ? "Close" : "Menu"}
       </button>
-      {showMenu ? <SideMenu setTasks={setTasks} /> : null}
+      {showMenu ? (
+        <SideMenu setTasks={setTasks} setShowNewTask={setShowNewTask} />
+      ) : null}
     </aside>
   );
 }
 
 //Html for the side bar, this is hidden until the showMenu state becomes true
-function SideMenu({ setTasks }) {
-  const [showNewTask, setShowNewTask] = useState(false);
+function SideMenu({ setShowNewTask }) {
   return (
     <ul className="btn-sidebar">
       <li>
@@ -120,9 +149,6 @@ function SideMenu({ setTasks }) {
         <button className="btn" onClick={() => setShowNewTask((show) => !show)}>
           New Task
         </button>
-        {showNewTask ? (
-          <NewTask setTasks={setTasks} setShowNewTask={setShowNewTask} />
-        ) : null}
       </li>
     </ul>
   );
