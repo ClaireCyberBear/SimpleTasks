@@ -7,6 +7,7 @@ function App() {
   const [showMenu, setShowMenu] = useState(false); //Menu sidebar by default is closed.
   const [showNewTask, setShowNewTask] = useState(false);
   const [tasks, setTasks] = useState([]);
+  const [error, setError] = useState("");
 
   useEffect(function () {
     async function getTasks() {
