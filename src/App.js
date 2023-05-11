@@ -4,7 +4,7 @@ import "./style.css";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false); //Menu sidebar by default is closed.
-
+  const [showNewTask, setShowNewTask] = useState(false);
   const [tasks, setTasks] = useState([]);
 
   useEffect(function () {
@@ -35,10 +35,13 @@ function App() {
         <MenuButton
           showMenu={showMenu}
           setShowMenu={setShowMenu}
-          setTasks={setTasks}
+          setShowNewTask={setShowNewTask}
         />
 
         <main className="main">
+          {showNewTask ? (
+            <NewTask setTasks={setTasks} setShowNewTask={setShowNewTask} />
+          ) : null}
           <TaskList tasks={tasks} setTasks={setTasks} />
         </main>
       </div>
@@ -84,6 +87,9 @@ function NewTask({ setTasks, setShowNewTask }) {
         onChange={(event) => setDescription(event.target.value)}
       />
       <div className="formsubmit">
+        <button className="btn form-btn" onClick={() => setShowNewTask(false)}>
+          Close
+        </button>
         <button className="btn form-btn">Add</button>
       </div>
     </form>
@@ -91,7 +97,7 @@ function NewTask({ setTasks, setShowNewTask }) {
 }
 
 //Little function for the MenuButton, when clicked it sets showMenu to true
-function MenuButton({ showMenu, setShowMenu, setTasks }) {
+function MenuButton({ showMenu, setShowMenu, setShowNewTask }) {
   return (
     <aside className="sidebar">
       <button
@@ -100,14 +106,19 @@ function MenuButton({ showMenu, setShowMenu, setTasks }) {
       >
         {showMenu ? "Close" : "Menu"}
       </button>
-      {showMenu ? <SideMenu setTasks={setTasks} /> : null}
+      {showMenu ? (
+        <SideMenu setShowNewTask={setShowNewTask} setShowMenu={setShowMenu} />
+      ) : null}
     </aside>
   );
 }
 
 //Html for the side bar, this is hidden until the showMenu state becomes true
-function SideMenu({ setTasks }) {
-  const [showNewTask, setShowNewTask] = useState(false);
+function SideMenu({ setShowNewTask, setShowMenu }) {
+  const handleClick = () => {
+    setShowNewTask(true);
+    setShowMenu(false);
+  };
   return (
     <ul className="btn-sidebar">
       <li>
@@ -117,12 +128,9 @@ function SideMenu({ setTasks }) {
         <button className="btn useless">Useless Button</button>
       </li>
       <li className="newtask">
-        <button className="btn" onClick={() => setShowNewTask((show) => !show)}>
+        <button className="btn" onClick={handleClick}>
           New Task
         </button>
-        {showNewTask ? (
-          <NewTask setTasks={setTasks} setShowNewTask={setShowNewTask} />
-        ) : null}
       </li>
     </ul>
   );
