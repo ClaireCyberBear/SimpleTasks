@@ -9,7 +9,7 @@ function App() {
   const [showNewTask, setShowNewTask] = useState(false);
   const [tasks, setTasks] = useState([]);
 
-  useEffect(function() {
+  useEffect(function () {
     async function getTasks() {
       let query = supabase.from("random_tasks").select("*");
       const { data: tasks, error } = await query.limit(5);
