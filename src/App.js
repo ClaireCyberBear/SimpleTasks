@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import Login from "./LoginPage";
 import supabase from "./supabase";
 import "./style.css";
+import { Menu } from "./components";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false); //Menu sidebar by default is closed.
@@ -14,63 +15,44 @@ function App() {
       let query = supabase.from("random_tasks").select("*");
       const { data: tasks, error } = await query.limit(5);
 
-      setTasks(tasks);
+      if (error) {
+        setError(error);
+      } else {
+        setTasks(tasks);
+      }
     }
     getTasks();
   }, []);
   return (
-    <Router>
-      <div className="container">
-        <header className="header">
-          <div className="logo">
-            <Link to="/">
-              <img
-                src="logo.png"
-                height="68"
-                width="68"
-                alt="SimpleTask Logo"
-              />
-            </Link>
-            <h1 className="title">SIMPLE TASK</h1>
-          </div>
-          <button className="btn btn-large">
-            <a href="https://github.com/ClaireCyberBear/SimpleTasks">
-              Source Code
-            </a>
-          </button>
-          <button className="btn btn-large">Home</button>
-          <Link to="/login" className="btn btn-large">
-            Login
-          </Link>
-        </header>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route
-            path="/"
-            element={
-              <div className="menu-task">
-                <MenuButton
-                  showMenu={showMenu}
-                  setShowMenu={setShowMenu}
-                  setTasks={setTasks}
-                  setShowNewTask={setShowNewTask}
-                />
-
-                <main className="main">
-                  {showNewTask ? (
-                    <NewTask
-                      setTasks={setTasks}
-                      setShowNewTask={setShowNewTask}
-                    />
-                  ) : null}
-                  <TaskList tasks={tasks} setTasks={setTasks} />
-                </main>
-              </div>
-            }
-          />
-        </Routes>
+    <div className="container">
+      <Header />
+      <div className="main">
+        <Menu
+          showMenu={showMenu}
+          setShowMenu={setShowMenu}
+          setShowNewTask={setShowNewTask}
+        />
+        <Task
+          tasks={tasks}
+          setTasks={setTasks}
+          setShowNewTask={setShowNewTask}
+          showNewTask={showNewTask}
+        />
       </div>
-    </Router>
+    </div>
+  );
+}
+
+function Header() {
+  return (
+    <header className="header">
+      <div className="logo">
+        <img src="logo.png" height="68" width="68" alt="SimpleTask Logo" />
+        <h1 className="title">SIMPLE TASK</h1>
+      </div>
+
+      <h1 className="username">DEMO USER</h1>
+    </header>
   );
 }
 
@@ -81,12 +63,12 @@ function NewTask({ setTasks, setShowNewTask }) {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const { data: NewTask, error } = await supabase
+    const { data: newTaskData, error } = await supabase
       .from("tasks")
       .insert([{ title, description }])
       .select();
 
-    if (!error) setTasks((tasks) => [NewTask[0], ...tasks]);
+    if (!error) setTasks((tasks) => [newTaskData[0], ...tasks]);
 
     setTitle("");
     setDescription("");
@@ -118,55 +100,24 @@ function NewTask({ setTasks, setShowNewTask }) {
   );
 }
 
-//Little function for the MenuButton, when clicked it sets showMenu to true
-function MenuButton({ showMenu, setShowMenu, setTasks, setShowNewTask }) {
-  return (
-    <aside className="sidebar">
-      <button
-        className="btn sidebar-open"
-        onClick={() => setShowMenu((show) => !show)}
-      >
-        {showMenu ? "Close" : "Menu"}
-      </button>
-      {showMenu ? (
-        <SideMenu setTasks={setTasks} setShowNewTask={setShowNewTask} />
-      ) : null}
-    </aside>
-  );
-}
-
-//Html for the side bar, this is hidden until the showMenu state becomes true
-function SideMenu({ setShowNewTask }) {
-  return (
-    <ul className="btn-sidebar">
-      <li>
-        <button className="btn tasklist-btn">Task List</button>
-      </li>
-      <li>
-        <button className="btn useless">Useless Button</button>
-      </li>
-      <li className="newtask">
-        <button className="btn" onClick={() => setShowNewTask((show) => !show)}>
-          New Task
-        </button>
-      </li>
-    </ul>
-  );
-}
-
 //This handles the list of tasks
-function TaskList({ tasks, setTasks }) {
+function Task({ tasks, setTasks, setShowNewTask, showNewTask }) {
   return (
-    <ul className="tasklist">
-      {tasks.map((task) => (
-        <Task key={task.id} task={task} setTasks={setTasks} />
-      ))}
-    </ul>
+    <div className="task-main">
+      {showNewTask && (
+        <NewTask setTasks={setTasks} setShowNewTask={setShowNewTask} />
+      )}
+      <ul className="tasklist">
+        {tasks.map((task) => (
+          <TaskList key={task.id} task={task} setTasks={setTasks} />
+        ))}
+      </ul>
+    </div>
   );
 }
 
 //This is where the individual task is loaded from supabase
-function Task({ task, setTasks }) {
+function TaskList({ task, setTasks }) {
   async function deleteTask() {
     const { data, error } = await supabase
       .from("tasks")
