@@ -7,18 +7,13 @@ function App() {
   const [showMenu, setShowMenu] = useState(false); //Menu sidebar by default is closed.
   const [showNewTask, setShowNewTask] = useState(false);
   const [tasks, setTasks] = useState([]);
-  const [error, setError] = useState("");
 
   useEffect(function () {
     async function getTasks() {
       let query = supabase.from("random_tasks").select("*");
       const { data: tasks, error } = await query.limit(5);
 
-      if (error) {
-        setError(error);
-      } else {
-        setTasks(tasks);
-      }
+      if (!error) setTasks(tasks);
     }
     getTasks();
   }, []);
