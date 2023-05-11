@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-import Login from "./LoginPage";
 import supabase from "./supabase";
 import "./style.css";
 import { Menu, Header } from "./components";
