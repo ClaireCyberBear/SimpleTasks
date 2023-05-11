@@ -12,7 +12,11 @@ function App() {
       let query = supabase.from("random_tasks").select("*");
       const { data: tasks, error } = await query.limit(5);
 
-      setTasks(tasks);
+      if (error) {
+        setError(error);
+      } else {
+        setTasks(tasks);
+      }
     }
     getTasks();
   }, []);
@@ -23,11 +27,7 @@ function App() {
           <img src="logo.png" height="68" width="68" alt="SimpleTask Logo" />
           <h1 className="title">SIMPLE TASK</h1>
         </div>
-        <button className="btn btn-large">
-          <a href="https://github.com/ClaireCyberBear/SimpleTasks">
-            Source Code
-          </a>
-        </button>
+
         <h1 className="username">DEMO USER</h1>
         <button className="btn btn-login hidden">Login</button>
       </header>
@@ -56,12 +56,12 @@ function NewTask({ setTasks, setShowNewTask }) {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const { data: NewTask, error } = await supabase
+    const { data: newTaskData, error } = await supabase
       .from("tasks")
       .insert([{ title, description }])
       .select();
 
-    if (!error) setTasks((tasks) => [NewTask[0], ...tasks]);
+    if (!error) setTasks((tasks) => [newTaskData[0], ...tasks]);
 
     setTitle("");
     setDescription("");
@@ -102,7 +102,7 @@ function MenuButton({ showMenu, setShowMenu, setShowNewTask }) {
     <aside className="sidebar">
       <button
         className="btn sidebar-open"
-        onClick={() => setShowMenu((show) => !show)}
+        onClick={() => setShowMenu(!showMenu)}
       >
         {showMenu ? "Close" : "Menu"}
       </button>
@@ -122,11 +122,16 @@ function SideMenu({ setShowNewTask, setShowMenu }) {
   return (
     <ul className="btn-sidebar">
       <li>
-        <button className="btn tasklist-btn">Task List</button>
+        <button className="btn">
+          <a href="https://github.com/ClaireCyberBear/SimpleTasks">
+            Source Code
+          </a>
+        </button>
       </li>
       <li>
-        <button className="btn useless">Useless Button</button>
+        <button className="btn tasklist-btn">Task List</button>
       </li>
+
       <li className="newtask">
         <button className="btn" onClick={handleClick}>
           New Task
