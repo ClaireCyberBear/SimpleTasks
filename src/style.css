@@ -20,12 +20,6 @@ body {
   height: 100vh;
 }
 
-#root,
-.container {
-  margin: 0 auto;
-  height: 100vh;
-}
-
 a {
   color: inherit;
   text-decoration: inherit;
@@ -40,6 +34,8 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-left: 5px;
+  padding-right: 5px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -96,7 +92,6 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
 }
 
 .task {
@@ -105,6 +100,7 @@ a {
   margin: 10px;
   display: flex;
   flex-direction: row;
+  justify-content: center;
   min-width: 200px;
   min-height: 100px;
 }
@@ -133,9 +129,9 @@ a {
 
 .taskform {
   max-width: 500px;
-  min-width: 300px;
+  min-width: 60%;
   min-height: 50px;
-  max-height: 200px;
+  max-height: 300px;
   display: flex;
   margin-top: 15px;
   flex: 1 1 auto;
@@ -159,7 +155,7 @@ input {
 
 .newdescription {
   min-height: 60px;
-  height: 120px;
+  height: auto;
   max-width: 100%;
   max-height: 300px;
 }
@@ -197,7 +193,8 @@ input {
   line-height: 1;
   text-transform: uppercase;
   margin-top: 15px;
-  font-size: 12px;
+  width: 50%;
+  font-size: 16px;
   padding: 16px 20px 12px;
   background: linear-gradient(
     to bottom,
@@ -217,7 +214,7 @@ input {
 
 .btn-large {
   margin-top: 10px;
-  font-size: 18px;
+  font-size: 20px;
   padding: 15px 32px 15px;
   width: 80%;
   margin-left: auto;
@@ -262,6 +259,9 @@ li {
     flex-direction: column;
     align-items: center;
   }
+  .task-main {
+    width: 90%;
+  }
   .sidebar {
     position: static;
     display: flex;
@@ -275,6 +275,9 @@ li {
   .sidebar-open {
     margin-top: 0;
     width: 50%;
+  }
+  .taskcontainer {
+    min-width: 90%;
   }
   .btn-sidebar {
     margin-top: 5px;
