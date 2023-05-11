@@ -23,15 +23,7 @@ function App() {
   }, []);
   return (
     <div className="container">
-      <header className="header">
-        <div className="logo">
-          <img src="logo.png" height="68" width="68" alt="SimpleTask Logo" />
-          <h1 className="title">SIMPLE TASK</h1>
-        </div>
-
-        <h1 className="username">DEMO USER</h1>
-        <button className="btn btn-login hidden">Login</button>
-      </header>
+      <Header />
       <div className="menu-task">
         <Menu
           showMenu={showMenu}
@@ -47,6 +39,19 @@ function App() {
         </main>
       </div>
     </div>
+  );
+}
+
+function Header() {
+  return (
+    <header className="header">
+      <div className="logo">
+        <img src="logo.png" height="68" width="68" alt="SimpleTask Logo" />
+        <h1 className="title">SIMPLE TASK</h1>
+      </div>
+
+      <h1 className="username">DEMO USER</h1>
+    </header>
   );
 }
 

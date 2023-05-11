@@ -16,9 +16,6 @@ body {
   margin-top: 0px;
   margin-right: 0px;
 }
-.hidden {
-  display: none !important;
-}
 
 /* MAIN LAYOUT */
 #root {
