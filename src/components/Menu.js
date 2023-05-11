@@ -13,7 +13,7 @@ export function Menu({ showMenu, setShowMenu, setShowNewTask }) {
     return (
       <aside className="sidebar">
         <button
-          className="btn sidebar-open"
+          className="btn btn-large"
           onClick={() => setShowMenu(!showMenu)}
         >
           {showMenu ? "Close" : "Menu"}

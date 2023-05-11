@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import supabase from "./supabase";
 import "./style.css";
 import { Menu } from "./components";
@@ -24,19 +24,18 @@ function App() {
   return (
     <div className="container">
       <Header />
-      <div className="menu-task">
+      <div className="main">
         <Menu
           showMenu={showMenu}
           setShowMenu={setShowMenu}
           setShowNewTask={setShowNewTask}
         />
-
-        <main className="main">
-          {showNewTask ? (
-            <NewTask setTasks={setTasks} setShowNewTask={setShowNewTask} />
-          ) : null}
-          <TaskList tasks={tasks} setTasks={setTasks} />
-        </main>
+        <Task
+          tasks={tasks}
+          setTasks={setTasks}
+          setShowNewTask={setShowNewTask}
+          showNewTask={showNewTask}
+        />
       </div>
     </div>
   );
@@ -103,18 +102,23 @@ function NewTask({ setTasks, setShowNewTask }) {
 }
 
 //This handles the list of tasks
-function TaskList({ tasks, setTasks }) {
+function Task({ tasks, setTasks, setShowNewTask, showNewTask }) {
   return (
-    <ul className="tasklist">
-      {tasks.map((task) => (
-        <Task key={task.id} task={task} setTasks={setTasks} />
-      ))}
-    </ul>
+    <div className="task-main">
+      {showNewTask && (
+        <NewTask setTasks={setTasks} setShowNewTask={setShowNewTask} />
+      )}
+      <ul className="tasklist">
+        {tasks.map((task) => (
+          <TaskList key={task.id} task={task} setTasks={setTasks} />
+        ))}
+      </ul>
+    </div>
   );
 }
 
 //This is where the individual task is loaded from supabase
-function Task({ task, setTasks }) {
+function TaskList({ task, setTasks }) {
   async function deleteTask() {
     const { data, error } = await supabase
       .from("tasks")
