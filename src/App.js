@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import supabase from "./supabase";
 import "./style.css";
-import { Menu } from "./components";
+import { Menu, Header } from "./components";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false); //Menu sidebar by default is closed.
@@ -22,7 +22,7 @@ function App() {
     getTasks();
   }, []);
   return (
-    <div className="container">
+    <>
       <Header />
       <div className="main">
         <Menu
@@ -37,20 +37,7 @@ function App() {
           showNewTask={showNewTask}
         />
       </div>
-    </div>
-  );
-}
-
-function Header() {
-  return (
-    <header className="header">
-      <div className="logo">
-        <img src="logo.png" height="68" width="68" alt="SimpleTask Logo" />
-        <h1 className="title">SIMPLE TASK</h1>
-      </div>
-
-      <h1 className="username">DEMO USER</h1>
-    </header>
+    </>
   );
 }
 
@@ -120,12 +107,12 @@ function Task({ tasks, setTasks, setShowNewTask, showNewTask }) {
 //This is where the individual task is loaded from supabase
 function TaskList({ task, setTasks }) {
   async function deleteTask() {
-    const { data, error } = await supabase
+    const { data: TaskData, error } = await supabase
       .from("tasks")
       .delete()
       .eq("id", task.id);
 
-    if (!error) setTasks((tasks) => tasks.filter((t) => t.id !== task.id));
+    if (!error) setTasks((tasks) => [TaskData[0], ...tasks]);
   }
 
   return (
