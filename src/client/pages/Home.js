@@ -11,9 +11,9 @@ export function Home() {
       seriously.
       <br></br>
       <br></br>
-      You can also check out my
+      You can also check out my -
       <a href="https://github.com/ClaireCyberBear/SimpleTasks">
-        <u> Source Code</u>
+        <u>Source Code</u>-
       </a>{" "}
       Enjoy!
     </div>
