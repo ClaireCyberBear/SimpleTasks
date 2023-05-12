@@ -29,7 +29,9 @@ export function Task({ tasks, setTasks }) {
         .delete()
         .eq("id", task.id);
 
-      if (!error) setTasks((tasks) => [TaskData[0], ...tasks]);
+      if (!error) {
+        setTasks((prevTasks) => prevTasks.filter((t) => t.id !== task.id));
+      }
     }
 
     return (
