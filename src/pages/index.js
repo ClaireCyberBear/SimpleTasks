@@ -1,1 +1,4 @@
-export { default as Login } from "./LoginPage";
+export { Login } from "./Login";
+export { Task } from "./Task";
+export { Home } from "./Home";
+export { NewTask } from "./NewTask";

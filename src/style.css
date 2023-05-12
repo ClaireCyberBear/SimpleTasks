@@ -74,10 +74,10 @@ a {
   flex: 1;
 }
 
-.task-main {
+.main-task {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 60%;
   margin-left: auto;
   margin-right: auto;
   align-items: center;
@@ -127,11 +127,21 @@ a {
   grid-row: 1;
 }
 
-.taskform {
+.welcome {
+  width: 70%;
+  height: 30%;
+  margin: auto;
+  margin-top: 10%;
+  font-size: 28px;
+}
+
+.form {
   max-width: 500px;
-  min-width: 60%;
-  min-height: 50px;
+  width: 60%;
+  height: 30%;
   max-height: 300px;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   margin-top: 15px;
   flex: 1 1 auto;
@@ -140,7 +150,7 @@ a {
   width: auto;
 }
 
-.taskform textarea,
+.form textarea,
 input {
   width: auto;
   background-color: var(--tertiary-bg-color);
@@ -269,7 +279,7 @@ li {
     flex-direction: column;
     align-items: center;
   }
-  .task-main {
+  .main-task {
     width: 90%;
   }
   .sidebar {
@@ -298,6 +308,7 @@ li {
   }
   .btn {
     margin: 3px;
+    width: 100px;
   }
   .btn-large {
     width: 35%;
