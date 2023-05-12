@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { supabase } from "../supabase";
+import supabase from "../supabase";
 
 export function NewTask({ setTasks, setCurrentPage }) {
   const [title, setTitle] = useState("");
