@@ -205,7 +205,6 @@ input {
   margin-top: 15px;
   width: 50%;
   font-size: 16px;
-  padding: 16px 20px 12px;
   background: linear-gradient(
     to bottom,
     rgba(63, 63, 63, 1) 5%,
@@ -235,7 +234,6 @@ input {
   margin-top: 10px;
   margin-right: 10px;
   font-size: 20px;
-  padding: 15px 32px 15px;
   width: 70%;
   margin-left: auto;
   margin-right: auto;
@@ -303,15 +301,21 @@ li {
     margin-top: 5px;
     min-width: 100vh;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
   }
   .btn {
-    margin: 3px;
-    width: 100px;
+    width: 80px;
+    padding: 5px;
+    margin: 5px;
+    height: 60px;
+    font-size: 14px;
+    font-weight: bold;
   }
   .btn-large {
-    width: 35%;
+    width: 30%;
+    font-size: 18px;
   }
   .newtask {
     display: flex;
