@@ -1,15 +1,15 @@
 import React from "react";
 
-export function Menu({ showMenu, setShowMenu, setShowNewTask }) {
+export function Menu({ showMenu, setShowMenu, setCurrentPage }) {
   return (
     <MenuButton
       showMenu={showMenu}
       setShowMenu={setShowMenu}
-      setShowNewTask={setShowNewTask}
+      setCurrentPage={setCurrentPage}
     />
   );
   //Little function for the MenuButton, when clicked it sets showMenu to true
-  function MenuButton({ showMenu, setShowMenu, setShowNewTask }) {
+  function MenuButton({ showMenu, setShowMenu, setCurrentPage }) {
     return (
       <aside className="sidebar">
         <button
@@ -19,16 +19,16 @@ export function Menu({ showMenu, setShowMenu, setShowNewTask }) {
           {showMenu ? "Close" : "Menu"}
         </button>
         {showMenu ? (
-          <SideMenu setShowNewTask={setShowNewTask} setShowMenu={setShowMenu} />
+          <SideMenu setCurrentPage={setCurrentPage} setShowMenu={setShowMenu} />
         ) : null}
       </aside>
     );
   }
 
   //Html for the side bar, this is hidden until the showMenu state becomes true
-  function SideMenu({ setShowNewTask, setShowMenu }) {
-    const handleClick = () => {
-      setShowNewTask(true);
+  function SideMenu({ setCurrentPage, setShowMenu }) {
+    const handleClick = (page) => {
+      setCurrentPage(page);
       setShowMenu(false);
     };
     return (
@@ -41,12 +41,23 @@ export function Menu({ showMenu, setShowMenu, setShowNewTask }) {
           </button>
         </li>
         <li>
-          <button className="btn tasklist-btn">Task List</button>
+          <button
+            className="btn tasklist-btn"
+            onClick={() => handleClick("Task")}
+          >
+            Task List
+          </button>
         </li>
 
         <li className="newtask">
-          <button className="btn" onClick={handleClick}>
+          <button className="btn" onClick={() => handleClick("NewTask")}>
             New Task
+          </button>
+        </li>
+
+        <li>
+          <button className="btn" onClick={() => handleClick("Login")}>
+            Login
           </button>
         </li>
       </ul>
