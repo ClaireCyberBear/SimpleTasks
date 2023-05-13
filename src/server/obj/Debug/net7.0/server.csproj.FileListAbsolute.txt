@@ -73,3 +73,4 @@ C:\Users\clair\OneDrive\Desktop\code\SimpleTasks\src\server\obj\Debug\net7.0\ref
 C:\Users\clair\OneDrive\Desktop\code\SimpleTasks\src\server\obj\Debug\net7.0\server.pdb
 C:\Users\clair\OneDrive\Desktop\code\SimpleTasks\src\server\obj\Debug\net7.0\server.genruntimeconfig.cache
 C:\Users\clair\OneDrive\Desktop\code\SimpleTasks\src\server\obj\Debug\net7.0\ref\server.dll
+C:\Users\clair\OneDrive\Desktop\code\SimpleTasks\src\server\bin\Debug\net7.0\appsettings.json

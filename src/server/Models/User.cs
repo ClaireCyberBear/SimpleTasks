@@ -7,9 +7,9 @@ public class User {
     public bool IsLoggedIn {get; set;}
 }
 
-    public class SignUpModel
-    {
-        public string Username { get; set; }
-        public int Pin { get; set; }
-    }
+public class SignUpModel
+{
+    public string? Username { get; set; }
+    public int Pin { get; set; }
+}
 }
