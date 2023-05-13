@@ -6,7 +6,6 @@ C:\Users\clair\OneDrive\Desktop\code\SimpleTasks\src\server\obj\Debug\net7.0\ser
 C:\Users\clair\OneDrive\Desktop\code\SimpleTasks\src\server\obj\Debug\net7.0\server.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\clair\OneDrive\Desktop\code\SimpleTasks\src\server\obj\Debug\net7.0\server.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\clair\OneDrive\Desktop\code\SimpleTasks\src\server\bin\Debug\net7.0\appsettings.Development.json
-C:\Users\clair\OneDrive\Desktop\code\SimpleTasks\src\server\bin\Debug\net7.0\appsettings.json
 C:\Users\clair\OneDrive\Desktop\code\SimpleTasks\src\server\bin\Debug\net7.0\server.exe
 C:\Users\clair\OneDrive\Desktop\code\SimpleTasks\src\server\bin\Debug\net7.0\server.deps.json
 C:\Users\clair\OneDrive\Desktop\code\SimpleTasks\src\server\bin\Debug\net7.0\server.runtimeconfig.json

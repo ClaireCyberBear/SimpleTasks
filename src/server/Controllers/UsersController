@@ -23,7 +23,7 @@ public class UserController : ControllerBase
         return await _context.Users.ToListAsync();
     }
 
-    // POST: api/Todos
+    // POST: api/
     [HttpPost]
     public async Task<ActionResult<User>> PostUser(User user)
     {
@@ -33,5 +33,26 @@ public class UserController : ControllerBase
         return CreatedAtAction(nameof(GetUsers), new { id = user.Id }, user);
     }
 
-    
+    [HttpPost]
+    public async Task<IActionResult> SignUp([FromBody] SignUpModel model)
+    {
+        var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Username == model.Username);
+        if (existingUser != null)
+        {
+            return BadRequest("Username taken");
+        }
+
+        var user = new User
+        {
+            Username = model.Username,
+            Pin = Services.HashService.HashPin(model.Pin),
+            IsLoggedIn = false
+        };
+
+        _context.Users.Add(user);
+        await _context.SaveChangesAsync();
+
+        return Ok(new { message = "Account created successfully" });
+    }
+
 }

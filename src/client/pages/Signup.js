@@ -1,6 +1,37 @@
 import React from "react";
 
 export function SignUp({ setCurrentPage }) {
+  const [username, setUsername] = React.useState("");
+  const [pin, setPin] = React.useState("");
+  const [confirmPin, setConfirmPin] = React.useState("");
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (pin !== confirmPin) {
+      alert("Pins do not match!");
+      return;
+    }
+
+    const response = await fetch("https://localhost:5131/User/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        pin,
+      }),
+    });
+
+    if (response.ok) {
+      setCurrentPage("Task");
+    } else {
+      const data = await response.json();
+      alert(data.error);
+    }
+  };
+
   return (
     <form className="form">
       <h3>
@@ -12,6 +43,8 @@ export function SignUp({ setCurrentPage }) {
         className="user"
         placeholder="Username"
         maxLength={16}
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
       />
       <input
         className="text"
@@ -19,6 +52,8 @@ export function SignUp({ setCurrentPage }) {
         cols="10"
         maxLength={6}
         placeholder="Create a 6 digit pin"
+        value={pin}
+        onChange={(e) => setPin(e.target.value)}
       />
       <input
         className="text"
@@ -26,6 +61,8 @@ export function SignUp({ setCurrentPage }) {
         cols="10"
         maxLength={6}
         placeholder="Confirm Pin"
+        value={confirmPin}
+        onChange={(e) => setConfirmPin(e.target.value)}
       />
       <div className="formsubmit">
         <button className="btn form-btn" onClick={() => setCurrentPage("Home")}>
