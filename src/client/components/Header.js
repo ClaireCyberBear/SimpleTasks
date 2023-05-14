@@ -7,7 +7,11 @@ export function Header({ setCurrentPage }) {
         <img src="logo.png" height="68" width="68" alt="SimpleTask Logo" />
         <h1 className="title">SIMPLE TASK</h1>
       </div>
-      <h1 className="username">DEMO USER</h1>
+      <div>
+        <button className="btn" onClick={() => setCurrentPage("Home")}>
+          Login{" "}
+        </button>
+      </div>
     </header>
   );
 }
