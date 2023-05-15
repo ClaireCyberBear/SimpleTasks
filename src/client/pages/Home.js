@@ -1,21 +1,27 @@
 import React from "react";
 
-export function Home() {
+export function Home({ setCurrentPage }) {
   return (
-    <div className="welcome">
-      Welcome to my task website! Just click the menu button to navigate the
-      site.
-      <br></br>
-      <br></br>
-      This is a demo of my front-end skills and is not meant to be used
-      seriously.
-      <br></br>
-      <br></br>
-      You can also check out my -
-      <a href="https://github.com/ClaireCyberBear/SimpleTasks">
-        <u>Source Code</u>-
-      </a>{" "}
-      Enjoy!
-    </div>
+    <form className="form">
+      <input type="text" placeholder="Username" maxLength={16} />
+      <input
+        className="text"
+        rows="12"
+        cols="10"
+        maxLength={6}
+        placeholder="Password"
+      />
+      <div className="formsubmit">
+        <button
+          className="btn form-btn"
+          onClick={() => setCurrentPage("SignUp")}
+        >
+          sign-up
+        </button>
+        <button className="btn form-btn" onClick={() => setCurrentPage("Task")}>
+          Login
+        </button>
+      </div>
+    </form>
   );
 }

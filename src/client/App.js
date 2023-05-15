@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./style.css";
 import { Menu, Header } from "./components";
-import { Task, Login, Home, NewTask } from "./pages";
+import { Task, SignUp, Home, NewTask } from "./pages";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false); //Menu sidebar by default is closed.
@@ -9,8 +9,8 @@ function App() {
   const [currentPage, setCurrentPage] = useState(["Home"]);
 
   const pageComponents = {
-    Login: <Login />,
-    Home: <Home />,
+    SignUp: <SignUp setCurrentPage={setCurrentPage} />,
+    Home: <Home setCurrentPage={setCurrentPage} />,
     Task: (
       <Task tasks={tasks} setTasks={setTasks} setCurrentPage={setCurrentPage} />
     ),
@@ -19,6 +19,7 @@ function App() {
 
   return (
     <>
+      <script>0</script>
       <Header setCurrentPage={setCurrentPage} />
       <div className="main">
         <Menu

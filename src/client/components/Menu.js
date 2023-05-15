@@ -56,8 +56,8 @@ export function Menu({ showMenu, setShowMenu, setCurrentPage }) {
         </li>
 
         <li>
-          <button className="btn" onClick={() => handleClick("Login")}>
-            Login
+          <button className="btn" onClick={() => handleClick("SignUp")}>
+            sign-up
           </button>
         </li>
       </ul>
