@@ -2,7 +2,7 @@
 
 PROJECT PURPOSE:
 To create a minimal distraction TODO prototype.
-This is just a project for me to demostrate basic React capabilities
+This is just a project for me to demostrate basic React and ASP.net capabilities
 
 HOW-TO-USE:
 Here is a demo website: https://master--simple-one-task.netlify.app/
