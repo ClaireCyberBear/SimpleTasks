@@ -1,4 +1,5 @@
 import React from "react";
+import supabase from "../supabase";
 
 export function Home({ setCurrentPage }) {
   return (

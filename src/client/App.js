@@ -6,6 +6,7 @@ import { Task, SignUp, Home, NewTask } from "./pages";
 function App() {
   const [showMenu, setShowMenu] = useState(false); //Menu sidebar by default is closed.
   const [tasks, setTasks] = useState([]);
+  const [user, setUser] = useState([]);
   const [currentPage, setCurrentPage] = useState(["Home"]);
 
   const pageComponents = {

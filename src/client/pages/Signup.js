@@ -1,4 +1,5 @@
 import React from "react";
+import supabase from "../supabase";
 
 export function SignUp({ setCurrentPage }) {
   const [username, setUsername] = React.useState("");
@@ -13,23 +14,23 @@ export function SignUp({ setCurrentPage }) {
       return;
     }
 
-    const response = await fetch("https://localhost:5131/User/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-        pin,
-      }),
-    });
+    // const response = await fetch("https://localhost:5131/User/signup", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     username,
+    //     pin,
+    //   }),
+    // });
 
-    if (response.ok) {
-      setCurrentPage("Task");
-    } else {
-      const data = await response.json();
-      alert(data.error);
-    }
+    // if (response.ok) {
+    //   setCurrentPage("Task");
+    // } else {
+    //   const data = await response.json();
+    //   alert(data.error);
+    //}
   };
 
   return (
