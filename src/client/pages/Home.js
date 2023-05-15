@@ -3,6 +3,9 @@ import React from "react";
 export function Home({ setCurrentPage }) {
   return (
     <form className="form">
+      <h3>
+        This signup is still a WIP and does not yet work <br></br>
+      </h3>
       <input type="text" placeholder="Username" maxLength={16} />
       <input
         className="text"

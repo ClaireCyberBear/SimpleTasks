@@ -12,31 +12,12 @@ export function SignUp({ setCurrentPage }) {
       alert("Pins do not match!");
       return;
     }
-
-    const response = await fetch("https://localhost:5131/User/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-        pin,
-      }),
-    });
-
-    if (response.ok) {
-      setCurrentPage("Task");
-    } else {
-      const data = await response.json();
-      alert(data.error);
-    }
   };
 
   return (
     <form className="form">
       <h3>
-        This is a demo site. <br></br> Please don't put in any sensitive
-        personal information
+        This signup is still a WIP and does not yet work <br></br>
       </h3>
       <input
         type="text"
