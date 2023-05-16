@@ -1,15 +1,16 @@
 import React from "react";
 
-export function Menu({ showMenu, setShowMenu, setCurrentPage }) {
+export function Menu({ showMenu, setShowMenu, setCurrentPage, uuid }) {
   return (
     <MenuButton
       showMenu={showMenu}
       setShowMenu={setShowMenu}
       setCurrentPage={setCurrentPage}
+      uuid={uuid}
     />
   );
   //Little function for the MenuButton, when clicked it sets showMenu to true
-  function MenuButton({ showMenu, setShowMenu, setCurrentPage }) {
+  function MenuButton({ showMenu, setShowMenu, setCurrentPage, uuid }) {
     return (
       <aside className="sidebar">
         <button
@@ -19,18 +20,28 @@ export function Menu({ showMenu, setShowMenu, setCurrentPage }) {
           {showMenu ? "Close" : "Menu"}
         </button>
         {showMenu ? (
-          <SideMenu setCurrentPage={setCurrentPage} setShowMenu={setShowMenu} />
+          <SideMenu
+            setCurrentPage={setCurrentPage}
+            setShowMenu={setShowMenu}
+            uuid={uuid}
+          />
         ) : null}
       </aside>
     );
   }
 
   //Html for the side bar, this is hidden until the showMenu state becomes true
-  function SideMenu({ setCurrentPage, setShowMenu }) {
+  function SideMenu({ setCurrentPage, setShowMenu, uuid }) {
     const handleClick = (page) => {
-      setCurrentPage(page);
-      setShowMenu(false);
+      if ((page === "Task" || page === "NewTask") && uuid.length === 0) {
+        alert("You are not signed in!");
+        setCurrentPage("Home");
+      } else {
+        setCurrentPage(page);
+        setShowMenu(false);
+      }
     };
+
     return (
       <ul className="btn-sidebar">
         <li>
@@ -56,7 +67,7 @@ export function Menu({ showMenu, setShowMenu, setCurrentPage }) {
         </li>
 
         <li>
-          <button className="btn" onClick={() => handleClick("SignUp")}>
+          <button className="btn" onClick={() => handleClick("Signup")}>
             sign-up
           </button>
         </li>
