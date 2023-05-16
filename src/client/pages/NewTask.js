@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import supabase from "../supabase";
 
-export function NewTask({ setTasks, setCurrentPage }) {
+export function NewTask({ setTasks, setCurrentPage, uuid }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
@@ -10,7 +10,7 @@ export function NewTask({ setTasks, setCurrentPage }) {
 
     const { data: newTaskData, error } = await supabase
       .from("tasks")
-      .insert([{ title, description }])
+      .insert([{ uuid, title, description }])
       .select();
 
     if (!error) setTasks((tasks) => [newTaskData[0], ...tasks]);

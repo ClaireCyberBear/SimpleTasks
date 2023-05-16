@@ -1,24 +1,38 @@
 import React, { useEffect } from "react";
 import supabase from "../supabase";
 
-export function Task({ tasks, setTasks, setCurrentPage }) {
-  if (uuid.length === 0) {
-    setCurrentPage("LoginAlert");
-  }
-  useEffect(function () {
-    async function getTasks() {
-      let query = supabase.from("random_tasks").select("*");
-      const { data: tasks, error } = await query.limit(5);
+export function Task({ tasks, setTasks, uuid, setCurrentPage }) {
+  useEffect(
+    function () {
+      async function getTasks() {
+        let query = supabase.from("tasks").select("*").eq("uuid", uuid);
+        const { data: tasks, error } = await query.limit(5);
 
-      if (!error) setTasks(tasks);
-    }
-    getTasks();
-  }, []);
+        if (!error) setTasks(tasks);
+      }
+      getTasks();
+    },
+    [uuid]
+  );
+
+  if (tasks.length === 0) {
+    return (
+      <div className="tasklist">
+        <button
+          className="btn form-btn"
+          onClick={() => setCurrentPage("NewTask")}
+        >
+          New Task
+        </button>
+        <p className="tasklist">No tasks right now. Create a new task!</p>
+      </div>
+    );
+  }
   return (
     <div className="main-task">
       <ul className="tasklist">
         {tasks.map((task) => (
-          <TaskList key={task.id} task={task} setTasks={setTasks} />
+          <TaskList key={task.id} uuid={uuid} task={task} setTasks={setTasks} />
         ))}
       </ul>
     </div>
@@ -30,7 +44,8 @@ export function Task({ tasks, setTasks, setCurrentPage }) {
       const { data: TaskData, error } = await supabase
         .from("tasks")
         .delete()
-        .eq("id", task.id);
+        .eq("id", task.id)
+        .eq("uuid", task.uuid);
 
       if (!error) {
         setTasks((prevTasks) => prevTasks.filter((t) => t.id !== task.id));

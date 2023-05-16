@@ -53,8 +53,10 @@ a {
 }
 
 .username {
-  font-size: 24px;
-  color: green;
+  margin-top: 15px;
+  margin-right: 10px;
+  font-size: 32px;
+  color: rgb(162, 236, 153);
 }
 
 /* MAIN LAYOUT */
@@ -143,6 +145,7 @@ a {
   max-width: 500px;
   width: 60%;
   height: 30%;
+  text-align: center;
   max-height: 300px;
   margin-left: auto;
   margin-right: auto;
@@ -150,13 +153,13 @@ a {
   margin-top: 5%;
   flex: 1 1 auto;
   flex-direction: column;
-  align-items: left;
+  align-items: center;
   width: auto;
 }
 
 .form textarea,
 input {
-  width: auto;
+  width: 80%;
   background-color: var(--tertiary-bg-color);
   border: none;
   border-radius: 10px;
@@ -175,14 +178,16 @@ input {
 }
 
 .formsubmit {
+  min-width: 100%;
   display: flex;
   justify-content: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 .form-btn {
-  max-width: 30%;
+  max-width: 20%;
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 /* BUTTONS */
@@ -210,6 +215,7 @@ input {
   text-transform: uppercase;
   margin-top: 15px;
   width: 60%;
+  max-width: 200px;
   font-size: 16px;
   background: linear-gradient(
     to bottom,
@@ -285,8 +291,16 @@ li {
     flex-direction: column;
     align-items: center;
   }
+  .title {
+    font-size: 18px;
+  }
   .main-task {
     width: 90%;
+  }
+  .username {
+    margin: auto;
+    font-size: 18px;
+    margin-right: 5px;
   }
   .sidebar {
     position: static;
@@ -330,6 +344,7 @@ li {
     min-width: 40%;
     margin: 5px;
   }
+
   .newtask {
     display: flex;
     flex-direction: column;
