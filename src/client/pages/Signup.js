@@ -1,40 +1,40 @@
 import React from "react";
 import supabase from "../supabase";
 
-export function SignUp({ setCurrentPage }) {
-  const [username, setUsername] = React.useState("");
+export function SignUp({ setCurrentPage, setuuid }) {
+  const [newUser, setNewUser] = React.useState("");
   const [pin, setPin] = React.useState("");
   const [confirmPin, setConfirmPin] = React.useState("");
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  if (uuid.length !== 0) {
+    setCurrentPage("LoginAlert");
+  }
+  if (pin !== confirmPin) {
+    alert("Pins do not match!");
+    return;
+  }
 
+  async function handleSubmit(event) {
+    event.preventDefault();
     if (pin !== confirmPin) {
       alert("Pins do not match!");
       return;
     }
 
-    // const response = await fetch("https://localhost:5131/User/signup", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     username,
-    //     pin,
-    //   }),
-    // });
+    const { data: newUserData, error } = await supabase
+      .from("users")
+      .insert([{ newUser, pin }])
+      .select();
 
-    // if (response.ok) {
-    //   setCurrentPage("Task");
-    // } else {
-    //   const data = await response.json();
-    //   alert(data.error);
-    //}
-  };
+    if (!error) setuuid((tasks) => [newUserData[0], ...users]);
+
+    setNewUser("");
+    setPin("");
+    setCurrentPage("Task");
+  }
 
   return (
-    <form className="form">
+    <form className="form" onSubmit={handleSubmit}>
       <h3>
         This is a demo site. <br></br> Please don't put in any sensitive
         personal information
@@ -44,8 +44,8 @@ export function SignUp({ setCurrentPage }) {
         className="user"
         placeholder="Username"
         maxLength={16}
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        value={newUser}
+        onChange={(e) => setNewUser(e.target.value)}
       />
       <input
         className="text"
@@ -69,9 +69,7 @@ export function SignUp({ setCurrentPage }) {
         <button className="btn form-btn" onClick={() => setCurrentPage("Home")}>
           Cancel
         </button>
-        <button className="btn form-btn" onClick={() => setCurrentPage("Task")}>
-          Create Account
-        </button>
+        <button className="btn form-btn">Create Account</button>
       </div>
     </form>
   );

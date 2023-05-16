@@ -1,7 +1,17 @@
 import React from "react";
 import supabase from "../supabase";
 
-export function Home({ setCurrentPage }) {
+export function Home({ setCurrentPage, uuid }) {
+  useEffect(function () {
+    async function getTasks() {
+      let query = supabase.from("random_tasks").select("*");
+      const { data: tasks, error } = await query.limit(5);
+
+      if (!error) setTasks(tasks);
+    }
+    getTasks();
+  }, []);
+
   return (
     <form className="form">
       <input type="text" placeholder="Username" maxLength={16} />

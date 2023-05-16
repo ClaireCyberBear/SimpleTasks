@@ -6,16 +6,30 @@ import { Task, SignUp, Home, NewTask } from "./pages";
 function App() {
   const [showMenu, setShowMenu] = useState(false); //Menu sidebar by default is closed.
   const [tasks, setTasks] = useState([]);
-  const [user, setUser] = useState([]);
+  const [uuid, setuuid] = useState([""]);
   const [currentPage, setCurrentPage] = useState(["Home"]);
 
   const pageComponents = {
-    SignUp: <SignUp setCurrentPage={setCurrentPage} />,
-    Home: <Home setCurrentPage={setCurrentPage} />,
-    Task: (
-      <Task tasks={tasks} setTasks={setTasks} setCurrentPage={setCurrentPage} />
+    SignUp: <SignUp setCurrentPage={setCurrentPage} setUser={setuuid} />,
+    Home: (
+      <Home setCurrentPage={setCurrentPage} setUser={setuuid} uuid={uuid} />
     ),
-    NewTask: <NewTask setTasks={setTasks} setCurrentPage={setCurrentPage} />,
+    LoginAlert: <LoginAlert />,
+    Task: (
+      <Task
+        tasks={tasks}
+        setTasks={setTasks}
+        setCurrentPage={setCurrentPage}
+        uuid={uuid}
+      />
+    ),
+    NewTask: (
+      <NewTask
+        setTasks={setTasks}
+        setCurrentPage={setCurrentPage}
+        uuid={uuid}
+      />
+    ),
   };
 
   return (

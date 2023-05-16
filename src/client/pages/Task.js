@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import supabase from "../supabase";
 
-export function Task({ tasks, setTasks }) {
+export function Task({ tasks, setTasks, setCurrentPage }) {
+  if (uuid.length === 0) {
+    setCurrentPage("LoginAlert");
+  }
   useEffect(function () {
     async function getTasks() {
       let query = supabase.from("random_tasks").select("*");
