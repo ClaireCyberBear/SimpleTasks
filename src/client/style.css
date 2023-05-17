@@ -74,6 +74,7 @@ a {
 
 .taskcontainer {
   flex: 1;
+  max-width: 90%;
 }
 
 .main-task {
@@ -105,23 +106,28 @@ a {
   justify-content: center;
   min-width: 200px;
   min-height: 100px;
+  flex-wrap: wrap;
 }
 
 .tasktitle {
   margin-left: 5px;
   background: rgb(52, 52, 52);
-  height: 40px;
+  min-height: 40px;
+  white-space: pre-wrap;
   border: solid var(--secondary-color);
   overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 .description {
   margin-left: 5px;
   border: 10px double var(--secondary-color);
   min-height: 60%;
   min-width: 80%;
-  align-self: flex-center;
+  max-width: 100%;
+  white-space: pre-wrap;
   background: rgb(52, 52, 52);
   overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 /* Task Elements */
 .newtask {
@@ -318,6 +324,7 @@ li {
   }
   .taskcontainer {
     min-width: 90%;
+    max-width: 100%;
   }
   .btn-sidebar {
     margin-top: 5px;
