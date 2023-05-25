@@ -8,6 +8,11 @@ export function NewTask({ setTasks, setCurrentPage, uuid }) {
   async function handleSubmit(event) {
     event.preventDefault();
 
+    if (title.trim() === "" || description.trim() === "") {
+      alert("Both title and description are required.");
+      return;
+    }
+
     const { data: newTaskData, error } = await supabase
       .from("tasks")
       .insert([{ uuid, title, description }])
