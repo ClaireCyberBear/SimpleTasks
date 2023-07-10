@@ -6,7 +6,7 @@ export function Task({ tasks, setTasks, uuid, setCurrentPage }) {
     function () {
       async function getTasks() {
         let query = supabase.from("tasks").select("*").eq("uuid", uuid);
-        const { data: tasks, error } = await query.limit(5);
+        const { data: tasks, error } = await query;
 
         if (!error) setTasks(tasks);
       }
