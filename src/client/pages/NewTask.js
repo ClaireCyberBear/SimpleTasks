@@ -8,7 +8,7 @@ export function NewTask({ setTasks, setCurrentPage, uuid }) {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    if (title.trim() === "" || description.trim() === "") {
+    if (title.trim() === "") {
       alert("Both title and description are required.");
       return;
     }
@@ -32,7 +32,7 @@ export function NewTask({ setTasks, setCurrentPage, uuid }) {
         placeholder="Title"
         value={title}
         onChange={(event) => setTitle(event.target.value)}
-        maxLength={30}
+        maxLength={35}
       />
       <textarea
         className="newdescription"
