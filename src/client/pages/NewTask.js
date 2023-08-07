@@ -4,12 +4,13 @@ import supabase from "../supabase";
 export function NewTask({ setTasks, setCurrentPage, uuid }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [toast, setToast] = useState({ visible: false, message: "" });
 
   async function handleSubmit(event) {
     event.preventDefault();
 
     if (title.trim() === "") {
-      alert("Both title and description are required.");
+      alert("Title is required.");
       return;
     }
 
@@ -20,13 +21,15 @@ export function NewTask({ setTasks, setCurrentPage, uuid }) {
 
     if (!error) setTasks((tasks) => [newTaskData[0], ...tasks]);
 
+    setToast({ visible: true, message: "SUCCESS!" });
+    setTimeout(() => setToast({ visible: false, message: "" }), 2000);
     setTitle("");
     setDescription("");
-    setCurrentPage("Task");
   }
 
   return (
     <form className="form" onSubmit={handleSubmit}>
+      {toast.visible && <div className="toast">{toast.message}</div>}
       <input
         type="text"
         placeholder="Title"

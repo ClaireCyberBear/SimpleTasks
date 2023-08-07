@@ -57,7 +57,9 @@ export function Task({ tasks, setTasks, uuid, setCurrentPage }) {
         <button className="finish" onClick={deleteTask}></button>
         <div className="taskcontainer">
           <h2 className="tasktitle">{task.title}</h2>
-          <h3 className="description">{task.description}</h3>
+          {task.description && task.description.trim() !== "" ? (
+            <h3 className="description">{task.description}</h3>
+          ) : null}
         </div>
       </li>
     );

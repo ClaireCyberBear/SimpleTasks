@@ -289,6 +289,16 @@ li {
   margin-top: 15px;
   transition: 2s;
 }
+.toast {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 5px;
+  max-width: 250px;
+  text-align: center;
+  transition: opacity 0.3s ease;
+}
 
 /* MEDIA QUERIES */
 
@@ -314,6 +324,18 @@ li {
     font-size: 20px;
     margin-right: 5px;
   }
+
+  .toast {
+    font-size: 12px;
+    font-weight: bold;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 5px;
+    max-width: 250px;
+    text-align: center;
+    transition: opacity 0.3s ease;
+  }
+
   .sidebar {
     position: static;
     display: flex;
